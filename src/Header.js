@@ -1,5 +1,5 @@
 export default function Header() {
     return (
-        <h1>News Page</h1>
+        <h1 className="m-5">News Page</h1>
     )
 }

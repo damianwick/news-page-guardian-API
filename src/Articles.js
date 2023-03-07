@@ -11,6 +11,10 @@ export default function Articles()  {
             .then(response => response.json())
             .then((data) => {
                 setApiResponse(data.response.results);
+                
+                // let regex = /1[0-2]|0?[1-9]/ 
+                let regex = /([01]?[0-9]|2[0-3]):[0-5][0-9]/ 
+                console.log(data.response.results[0].webPublicationDate.match(regex)[0])
             })            
             .catch(err => console.error("There is an error " + err))
     }            
@@ -19,6 +23,8 @@ export default function Articles()  {
 
     useEffect(() => {getArticles()}, []);
 
+    const regexDate = /[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])/gm;
+    const regexTime = /([01]?[0-9]|2[0-3]):[0-5][0-9]/;
     // section=news&
     // section=tech&
     // section=sport&
@@ -34,7 +40,7 @@ export default function Articles()  {
                         return <Headline 
                             title={el.webTitle} 
                             section={el.sectionName}
-                            date={el.webPublicationDate}
+                            date={el.webPublicationDate.match(regexTime)[0] + ", " + el.webPublicationDate.match(regexDate)}
                             url={el.webUrl}
                         />})}
                 </ul>
