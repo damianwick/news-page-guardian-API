@@ -1,15 +1,16 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
+import Search from "./Search";
 
 export default function PageSizeSelect(props) {
     const selectRef = useRef(null); 
     
     return (
         <div className="w-100 bg-secondary d-flex justify-content-end">
+            <Search handleSearch={props.handleSearch}/>
             <p className="p-0 m-1 me-2 text-light">
                 Select the number of headlines
                 </p>
-            <select 
-            className="" 
+            <select
             type="select" 
             ref={selectRef} 
             onChange={() => props.handlePageSize(selectRef.current.value)} 
